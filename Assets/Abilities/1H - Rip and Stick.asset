@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 678a6e1a3969d0d459e9094ea6082f4f, type: 3}
+  m_Name: 1H - Rip and Stick
+  m_EditorClassIdentifier: 
+  Name: Rip and Stick
+  AbilityID: 211
+  AbilityType: 200
+  RequiredSkillLevel: 1
+  EffectType: 0
+  EffectMagnitude: 0
+  EnergyCost: 0
+  Range: 5
+  IsAOE: 0
+  IsEnabled: 0
+  Icon: {fileID: 21300000, guid: 577e6ed71ad127c419c7b695f370123c, type: 3}
