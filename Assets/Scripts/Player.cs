@@ -8,6 +8,10 @@ public class Player : Destructible
     public float maxEnergy = 100f;
     public float currentEnergy = 100f;
     public float energyRegenRate = 5f;
+    public float speed = 50f;
+    public float sprintCost = 10f;
+    public float jumpCost = 20f;
+    public float jumpStrength = 5f;
     public GameObject SoulStone;
     
     private bool isDead = false;
@@ -15,6 +19,7 @@ public class Player : Destructible
     private TargetingSystem targetingSystem;
     private MatchHandler matchHandler;
     private Character myCharacter;
+    private Rigidbody myRigidbody;
 
     private Ability primedAbility;
 
@@ -23,14 +28,16 @@ public class Player : Destructible
     private bool isDodging = false;
     private bool isParrying = false;
     private bool isHardening = false;
+    private bool isSprinting = false;
 
 
     void Start()
     {
         matchHandler = FindObjectOfType<MatchHandler>();
         myCharacter = GetComponent<Character>();
+        myRigidbody = GetComponent<Rigidbody>();
         currentEnergy = maxEnergy;
-        InvokeRepeating("RegenEnergy", 1f, 1f);
+        InvokeRepeating("UpdateEnergy", 1f, 1f);
         myHUD = GetComponent<PlayerHUD>();
         myHUD.UpdateVitals();
         targetingSystem = GetComponent<TargetingSystem>();
@@ -108,12 +115,26 @@ public class Player : Destructible
         // Enable exit game button
     } 
 
-    private void RegenEnergy()
+    private void UpdateEnergy()
     {
-        currentEnergy += energyRegenRate;
-        if(currentEnergy > maxEnergy)
+        if (isSprinting)
         {
-            currentEnergy = maxEnergy;
+            currentEnergy -= sprintCost;
+            if (currentEnergy <= 0)
+            {
+                currentEnergy = 0;
+                ToggleSprint();
+                Debug.Log("You are out of energy!");
+            }
+            
+        }
+        else
+        {
+            currentEnergy += energyRegenRate;
+            if (currentEnergy > maxEnergy)
+            {
+                currentEnergy = maxEnergy;
+            }
         }
         myHUD.UpdateVitals();
     }
@@ -478,5 +499,72 @@ public class Player : Destructible
     public void ClearTarget()
     {
         targetingSystem.currentTarget = null;
+        Debug.Log("Target cleared");
+        primedAbility = null;
+        Debug.Log("Ability deprimed");
+    }
+
+    public void SwitchWeapons()
+    {
+        usingAlternateWeapons = !usingAlternateWeapons;
+        Debug.Log("Weapons and abilities switched");
+    }
+
+    public void ToggleSprint()
+    {
+        isSprinting = !isSprinting;
+        if (isSprinting)
+        {
+            Debug.Log("Sprinting...");
+            speed *= 1.5f;
+        }
+        else
+        {
+            Debug.Log("Jogging");
+            speed /= 1.5f;
+        }
+    }
+
+    public void Jump()
+    {
+        if(currentEnergy >= jumpCost)
+        {
+            currentEnergy -= jumpCost;
+            myRigidbody.AddForce(Vector3.up * jumpStrength, ForceMode.Impulse);
+        }
+        else
+        {
+            Debug.Log("You don't have enough energy to jump!");
+        }
+    }
+
+    public void Interact()
+    {
+        Debug.Log("Interacting with target");
+    }
+
+    public void UseTrinket()
+    {
+        Debug.Log("Using trinket...");
+    }
+
+    public void UseConsumable()
+    {
+        Debug.Log("Using consumable...");
+    }
+
+    public void PingLocation()
+    {
+        Debug.Log("Pinging target location");
+    }
+
+    public void Emote()
+    {
+        Debug.Log("Using emote...");
+    }
+
+    public void Chat()
+    {
+        Debug.Log("Sending chat message...");
     }
 }

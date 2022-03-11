@@ -1,0 +1,41 @@
+Whitepaper:
+https://docs.google.com/document/d/1QZs8EdAjEuitZBYgRtntykej3hhKQfLojnvHIo144vk/edit
+
+To do:
+
+==Pre-alpha / early development==
+
+1.0.0
+Initial build
+
+1.0.1
+-Implemented gamepad controls
+-Added sprint functionality
+-Add energy cost to jumping
+-Added placeholders for future functionality (chat, trinkets, pinging, etc.)
+-Reworked title UI to work with gamepad
+-Redesigned skills tab of the character creator UI to mirror the equipment and abilities tabs
+-Redesigned attributes tab of the character creator UI to use sliders
+
+1.0.2
+-Change navigation mapping to be smoother
+
+Bot AI
+Models and basic animations
+Crafting system
+
+==Start pitching the game to investors==
+
+Ability-specific animations
+Network multiplayer
+Matchmaking
+
+==Start alpha testing==
+
+Leveling system
+In-game economy (currency and player assets)
+
+==Start beta testing==
+
+Tokenization
+List on exchanges

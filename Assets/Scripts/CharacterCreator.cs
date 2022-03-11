@@ -48,4 +48,14 @@ public class CharacterCreator : MonoBehaviour
         saveHandler.LoadCharacter(character, slotIndex);
         Debug.Log("Character loaded");
     }
+
+    public void ChangeTabRight()
+    {
+        Debug.Log("Changing tab to the right");
+    }
+
+    public void ChangeTabLeft()
+    {
+        Debug.Log("Changing tab to the left");
+    }
 }

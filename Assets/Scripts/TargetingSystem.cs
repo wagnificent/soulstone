@@ -34,7 +34,8 @@ public class TargetingSystem : MonoBehaviour
 
     public void SelectTarget()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Vector3 pos = new Vector3(Camera.main.pixelWidth / 2, Camera.main.pixelHeight / 2);
+        Ray ray = Camera.main.ScreenPointToRay(pos);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit))

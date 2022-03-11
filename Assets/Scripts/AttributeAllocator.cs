@@ -13,21 +13,32 @@ public class AttributeAllocator : MonoBehaviour
     public Text coordinationBonus;
     public Text agilityBonus;
     public Text willpowerBonus;
+
+    public Slider StrengthSlider;
+    public Slider EnduranceSlider;
+    public Slider CoordinationSlider;
+    public Slider AgilitySlider;
+    public Slider WillpowerSlider;
+
     public float attributePointMax = 100;
     public float attributePointBalance;
 
 
-    public void modStrength(float amount)
+    public void modStrength()
     {
+        float amount = StrengthSlider.value - myCharacter.Strength.AllocationBonus;
+
         if (
-            attributePointBalance - amount > attributePointMax || 
-            attributePointBalance - amount < 0 || 
+            attributePointBalance - amount > attributePointMax ||
+            attributePointBalance - amount < 0 ||
             myCharacter.Strength.AllocationBonus + amount < 0
             )
         {
+            Debug.Log("Strength point allocation invalid");
+            StrengthSlider.value = myCharacter.Strength.AllocationBonus;
             return;
         }
-        else 
+        else
         {
             myCharacter.Strength.AllocationBonus += amount;
             attributePointBalance -= amount;
@@ -35,14 +46,18 @@ public class AttributeAllocator : MonoBehaviour
         }
     }
 
-    public void modEndurance(float amount)
+    public void modEndurance()
     {
+        float amount = EnduranceSlider.value - myCharacter.Endurance.AllocationBonus;
+
         if (
             attributePointBalance - amount > attributePointMax ||
             attributePointBalance - amount < 0 ||
             myCharacter.Endurance.AllocationBonus + amount < 0
             )
         {
+            Debug.Log("Enduranct point allocation invalid");
+            EnduranceSlider.value = myCharacter.Endurance.AllocationBonus;
             return;
         }
         else
@@ -53,14 +68,18 @@ public class AttributeAllocator : MonoBehaviour
         }
     }
 
-    public void modCoordination(float amount)
+    public void modCoordination()
     {
+        float amount = CoordinationSlider.value - myCharacter.Coordination.AllocationBonus;
+
         if (
             attributePointBalance - amount > attributePointMax ||
             attributePointBalance - amount < 0 ||
             myCharacter.Coordination.AllocationBonus + amount < 0
             )
         {
+            Debug.Log("Coordination point allocation invalid");
+            CoordinationSlider.value = myCharacter.Coordination.AllocationBonus;
             return;
         }
         else
@@ -71,14 +90,18 @@ public class AttributeAllocator : MonoBehaviour
         }
     }
 
-    public void modAgility(float amount)
+    public void modAgility()
     {
+        float amount = AgilitySlider.value - myCharacter.Agility.AllocationBonus;
+
         if (
             attributePointBalance - amount > attributePointMax ||
             attributePointBalance - amount < 0 ||
             myCharacter.Agility.AllocationBonus + amount < 0
             )
         {
+            Debug.Log("Agility point allocation invalid");
+            AgilitySlider.value = myCharacter.Agility.AllocationBonus;
             return;
         }
         else
@@ -89,14 +112,18 @@ public class AttributeAllocator : MonoBehaviour
         }
     }
 
-    public void modWillpower(float amount)
+    public void modWillpower()
     {
+        float amount = WillpowerSlider.value - myCharacter.Willpower.AllocationBonus;
+
         if (
             attributePointBalance - amount > attributePointMax ||
             attributePointBalance - amount < 0 ||
             myCharacter.Willpower.AllocationBonus + amount < 0
             )
         {
+            Debug.Log("Willpower point allocation invalid");
+            WillpowerSlider.value = myCharacter.Willpower.AllocationBonus;
             return;
         }
         else
@@ -115,6 +142,12 @@ public class AttributeAllocator : MonoBehaviour
         coordinationBonus.text = myCharacter.Coordination.AllocationBonus.ToString();
         agilityBonus.text = myCharacter.Agility.AllocationBonus.ToString();
         willpowerBonus.text = myCharacter.Willpower.AllocationBonus.ToString();
+
+        StrengthSlider.value = myCharacter.Strength.AllocationBonus;
+        EnduranceSlider.value = myCharacter.Endurance.AllocationBonus;
+        CoordinationSlider.value = myCharacter.Coordination.AllocationBonus;
+        AgilitySlider.value = myCharacter.Agility.AllocationBonus;
+        WillpowerSlider.value = myCharacter.Willpower.AllocationBonus;
     }
 
     public void LoadAttributes(Character character)

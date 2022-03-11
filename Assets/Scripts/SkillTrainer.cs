@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using Wagnificent.CharacterStats;
 
@@ -9,18 +7,26 @@ public class SkillTrainer : MonoBehaviour
     public Character myCharacter;
 
     public Text SkillPointTracker;
-    public Text UnarmedBonus;
-    public Text OneHandedBonus;
-    public Text TwoHandedBonus;
-    public Text ArcheryBonus;
-    public Text CombatMagicBonus;
-    public Text VitalMagicBonus;
-    public Text SupportMagicBonus;
-    public Text UtilityMagicBonus;
-    public Text BlockBonus;
-    public Text DodgeBonus;
-    public Text ParryBonus;
-    public Text HardenBonus;
+
+    public GameObject[] TrainingPanels;
+    public GameObject[] SkillIcons;
+
+    public GameObject NovicePanel;
+    public GameObject AdeptPanel;
+    public GameObject MasterPanel;
+
+    public GameObject UnarmedIcon;
+    public GameObject OneHandedIcon;
+    public GameObject TwoHandedIcon;
+    public GameObject ArcheryIcon;
+    public GameObject CombatIcon;
+    public GameObject VitalIcon;
+    public GameObject SupportIcon;
+    public GameObject UtilityIcon;
+    public GameObject DodgeIcon;
+    public GameObject BlockIcon;
+    public GameObject ParryIcon;
+    public GameObject HardenIcon;
 
     public float SkillPointMax = 300;
     public float SkillPointBalance;
@@ -32,6 +38,24 @@ public class SkillTrainer : MonoBehaviour
         UpdateTrainingBonuses();
         UpdateSkillBalance();
         UpdateSkillUI();
+        UpdateSkillIcons();
+    }
+
+    public void MoveToNovice(GameObject skillButton)
+    {
+        skillButton.transform.SetParent(NovicePanel.transform);
+    }
+
+    public void MoveToAdept(GameObject skillButton)
+    {
+        skillButton.transform.SetParent(AdeptPanel.transform);
+        Debug.Log(skillButton.name + " moved to Adept Panel!");
+    }
+
+    public void MoveToMaster(GameObject skillButton)
+    {
+        skillButton.transform.SetParent(MasterPanel.transform);
+        Debug.Log(skillButton.name + " moved to Master Panel!");
     }
 
     public void ModUnarmed(int skillLevel)
@@ -324,18 +348,94 @@ public class SkillTrainer : MonoBehaviour
     private void UpdateSkillUI()
     {
         SkillPointTracker.text = SkillPointBalance.ToString();
-        UnarmedBonus.text = myCharacter.Unarmed.TrainingBonus.ToString();
-        OneHandedBonus.text = myCharacter.OneHanded.TrainingBonus.ToString();
-        TwoHandedBonus.text = myCharacter.TwoHanded.TrainingBonus.ToString();
-        ArcheryBonus.text = myCharacter.Archery.TrainingBonus.ToString();
-        CombatMagicBonus.text = myCharacter.CombatMagic.TrainingBonus.ToString();
-        VitalMagicBonus.text = myCharacter.VitalMagic.TrainingBonus.ToString();
-        SupportMagicBonus.text = myCharacter.SupportMagic.TrainingBonus.ToString();
-        UtilityMagicBonus.text = myCharacter.UtilityMagic.TrainingBonus.ToString();
-        BlockBonus.text = myCharacter.Block.TrainingBonus.ToString();
-        DodgeBonus.text = myCharacter.Dodge.TrainingBonus.ToString();
-        ParryBonus.text = myCharacter.Parry.TrainingBonus.ToString();
-        HardenBonus.text = myCharacter.Harden.TrainingBonus.ToString();
+    }
+
+    private void UpdateSkillIcons()
+    {
+        //Move the skill icons to the appropriate panel
+        if (myCharacter.Unarmed.SkillLevel == 2) { MoveToMaster(UnarmedIcon); }
+        else if (myCharacter.Unarmed.SkillLevel == 1) { MoveToAdept(UnarmedIcon); }
+
+        if (myCharacter.OneHanded.SkillLevel == 2) { MoveToMaster(OneHandedIcon); }
+        else if (myCharacter.OneHanded.SkillLevel == 1) { MoveToAdept(OneHandedIcon); }
+
+        if (myCharacter.TwoHanded.SkillLevel == 2) { MoveToMaster(TwoHandedIcon); }
+        else if (myCharacter.TwoHanded.SkillLevel == 1) { MoveToAdept(TwoHandedIcon); }
+
+        if (myCharacter.Archery.SkillLevel == 2) { MoveToMaster(ArcheryIcon); }
+        else if (myCharacter.Archery.SkillLevel == 1) { MoveToAdept(ArcheryIcon); }
+
+        if (myCharacter.CombatMagic.SkillLevel == 2) { MoveToMaster(CombatIcon); }
+        else if (myCharacter.CombatMagic.SkillLevel == 1) { MoveToAdept(CombatIcon); }
+
+        if (myCharacter.VitalMagic.SkillLevel == 2) { MoveToMaster(VitalIcon); }
+        else if (myCharacter.VitalMagic.SkillLevel == 1) { MoveToAdept(VitalIcon); }
+
+        if (myCharacter.SupportMagic.SkillLevel == 2) { MoveToMaster(SupportIcon); }
+        else if (myCharacter.SupportMagic.SkillLevel == 1) { MoveToAdept(SupportIcon); }
+
+        if (myCharacter.UtilityMagic.SkillLevel == 2) { MoveToMaster(UtilityIcon); }
+        else if (myCharacter.UtilityMagic.SkillLevel == 1) { MoveToAdept(UtilityIcon); }
+
+        if (myCharacter.Dodge.SkillLevel == 2) { MoveToMaster(DodgeIcon); }
+        else if (myCharacter.Dodge.SkillLevel == 1) { MoveToAdept(DodgeIcon); }
+
+        if (myCharacter.Block.SkillLevel == 2) { MoveToMaster(BlockIcon); }
+        else if (myCharacter.Block.SkillLevel == 1) { MoveToAdept(BlockIcon); }
+
+        if (myCharacter.Parry.SkillLevel == 2) { MoveToMaster(ParryIcon); }
+        else if (myCharacter.Parry.SkillLevel == 1) { MoveToAdept(ParryIcon); }
+
+        if (myCharacter.Harden.SkillLevel == 2) { MoveToMaster(HardenIcon); }
+        else if (myCharacter.Harden.SkillLevel == 1) { MoveToAdept(HardenIcon); }
+    }
+
+    public bool TrainSkill(int skillIndex, int skillLevel)
+    {
+        Skill targetSkill = RetrieveSkill(skillIndex);
+
+        targetSkill.TrainingBonus = skillLevel * 50;
+        UpdateSkillBalance();
+
+        //Check to see if the player can afford to train that skill to that level
+        if (SkillPointBalance < 0 || SkillPointBalance > SkillPointMax)
+        {
+            //Revert the change
+            targetSkill.TrainingBonus = targetSkill.SkillLevel * 50;
+            UpdateSkillBalance();
+            Debug.Log("SkillPointBalance outside of valid range");
+            return false;
+        }
+        else
+        {
+            //Accept the change and move the icon
+            targetSkill.SkillLevel = skillLevel;
+            SkillIcons[skillIndex].transform.parent = TrainingPanels[skillLevel].transform;
+            UpdateSkillUI();
+            Debug.Log(targetSkill + " has been trained to level " + skillLevel);
+            return true;
+        }
+    }
+
+    private Skill RetrieveSkill(int skillIndex)
+    {
+        if (skillIndex == 0) { return myCharacter.Unarmed; }
+        if (skillIndex == 1) { return myCharacter.OneHanded; }
+        if (skillIndex == 2) { return myCharacter.TwoHanded; }
+        if (skillIndex == 3) { return myCharacter.Archery; }
+        if (skillIndex == 4) { return myCharacter.CombatMagic; }
+        if (skillIndex == 5) { return myCharacter.VitalMagic; }
+        if (skillIndex == 6) { return myCharacter.SupportMagic; }
+        if (skillIndex == 7) { return myCharacter.UtilityMagic; }
+        if (skillIndex == 8) { return myCharacter.Dodge; }
+        if (skillIndex == 9) { return myCharacter.Block; }
+        if (skillIndex == 10) { return myCharacter.Parry; }
+        if (skillIndex == 11) { return myCharacter.Harden; }
+        else 
+        {
+            Debug.Log("Skill not found");
+            return null; 
+        }
     }
 
 }
