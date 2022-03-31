@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b66af16fca3e4c440bc3e3de5b4f841c, type: 3}
   m_Name: Practice Staff
   m_EditorClassIdentifier: 
+  type: 0
+  ID: 4
   Name: Oak Staff
-  WeaponID: 301
-  WeaponType: 300
+  Icon: {fileID: 21300000, guid: dd5c2bbe2dc5ab24bbe66e0f8052ca66, type: 3}
+  WeaponType: 2
   BaseDamage: 10
   CanChannelMagic: 1
   IsLarge: 1
   IsEquipped: 0
   IsActive: 0
-  Icon: {fileID: 21300000, guid: dd5c2bbe2dc5ab24bbe66e0f8052ca66, type: 3}

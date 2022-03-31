@@ -3,22 +3,21 @@ using UnityEngine.UI;
 
 public class AbilitySlot : MonoBehaviour
 {
-    public Ability AbilityItem;
+    public int AbilityIndex;
+    public bool IsPrimary;
+    
+    private UIManager uIManager;
+    private Button button;
 
-    private AbilitySelector abilitySelector;
-
-    void Start()
+    private void Awake()
     {
-        abilitySelector = FindObjectOfType<AbilitySelector>();
+        uIManager = FindObjectOfType<UIManager>();
+        button = GetComponent<Button>();
+        button.onClick.AddListener(OpenAbilityBank);
     }
 
-    public void EquipAsPrimary()
+    public void OpenAbilityBank()
     {
-        abilitySelector.EquipPrimaryAbility(AbilityItem);
-    }
-
-    public void EquipAsAlternate()
-    {
-        abilitySelector.EquipAlternateAbility(AbilityItem);
+        uIManager.OpenAbilityBank(AbilityIndex, IsPrimary);
     }
 }

@@ -10,12 +10,12 @@
 
     public class StatModifier
     {
-        public readonly float Value;
+        public int Value;
         public readonly StatModType Type;
         public readonly int Order;
         public readonly object Source;
 
-        public StatModifier(float value, StatModType type, int order, object source)
+        public StatModifier(int value, StatModType type, int order, object source)
         {
             Value = value;
             Type = type;
@@ -23,9 +23,9 @@
             Source = source;
         }
 
-        public StatModifier(float value, StatModType type) : this(value, type, (int)type, null) { }
-        public StatModifier(float value, StatModType type, int order) : this(value, type, order, null) { }
-        public StatModifier(float value, StatModType type, object source) : this(value, type, (int)type, source) { }
+        public StatModifier(int value, StatModType type) : this(value, type, (int)type, null) { }
+        public StatModifier(int value, StatModType type, int order) : this(value, type, order, null) { }
+        public StatModifier(int value, StatModType type, object source) : this(value, type, (int)type, source) { }
 
     }
 }

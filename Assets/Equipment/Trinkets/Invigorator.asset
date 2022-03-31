@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c6953dd83623c8479fd5050eacd91b9, type: 3}
   m_Name: Invigorator
   m_EditorClassIdentifier: 
+  type: 2
+  ID: 201
   Name: Invigorator
-  TrinketID: 201
-  TrinketType: 200
   Icon: {fileID: 21300000, guid: ee38ac330c77deb4594259dd685edd35, type: 3}
+  TrinketType: 200

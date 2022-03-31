@@ -1,9 +1,9 @@
 Whitepaper:
-https://docs.google.com/document/d/1QZs8EdAjEuitZBYgRtntykej3hhKQfLojnvHIo144vk/edit
+https://docs.google.com/document/d/1QZs8EdAjEuitZBYgRtntykej3hhKQfLojnvHIo144vk/edit?usp=sharing
 
 To do:
 
-==Pre-alpha / early development==
+==Pre-Alpha==
 
 1.0.0
 Initial build
@@ -18,10 +18,20 @@ Initial build
 -Redesigned attributes tab of the character creator UI to use sliders
 
 1.0.2
--Change navigation mapping to be smoother
+-Consolidated and optimized character editing functions in the character creator script
+-Created UI scripts to separate UI functions from character editing functions
+-Changed character attributes, skills, and equipment to arrays
+-Changed all character stats to ints instead of floats
+-Redesigned equipment and abilities tabs to use auto-generated buttons
+-Created stats preview window in character editor
 
-Bot AI
+1.0.3
+-Create "builds" that auto-allocate attribute and skill points
+-Create filters for abilities in character creator?
+-Add skin tab (auto-generate dye buttons)?
+
 Models and basic animations
+Bot AI
 Crafting system
 
 ==Start pitching the game to investors==
@@ -30,12 +40,12 @@ Ability-specific animations
 Network multiplayer
 Matchmaking
 
-==Start alpha testing==
+==Alpha==
 
 Leveling system
 In-game economy (currency and player assets)
 
-==Start beta testing==
+==Beta==
 
 Tokenization
 List on exchanges

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70f3f247d7534b24fa982f0f3d6a9fd0, type: 3}
   m_Name: Potion
   m_EditorClassIdentifier: 
+  type: 3
+  ID: 302
   Name: Health Potion
-  ConsumableID: 101
-  ConsumableType: 100
   Icon: {fileID: 21300000, guid: f72a92f09b8805841b99fa2397c3a917, type: 3}
+  ConsumableType: 100

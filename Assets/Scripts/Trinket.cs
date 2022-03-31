@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
-using Wagnificent.CharacterStats;
 
 public enum TrinketType
 {
@@ -9,10 +7,7 @@ public enum TrinketType
 }
 
 [CreateAssetMenu(fileName = "Trinket", menuName = "Trinket")]
-public class Trinket : ScriptableObject
+public class Trinket : Equipment
 {
-    public string Name;
-    public int TrinketID;
     public TrinketType TrinketType;
-    public Sprite Icon;
 }

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70f3f247d7534b24fa982f0f3d6a9fd0, type: 3}
   m_Name: Trap
   m_EditorClassIdentifier: 
+  type: 3
+  ID: 304
   Name: Clamp Trap
-  ConsumableID: 301
-  ConsumableType: 300
   Icon: {fileID: 21300000, guid: 7fa8e52f06f23bf4eab2e6a184085085, type: 3}
+  ConsumableType: 300

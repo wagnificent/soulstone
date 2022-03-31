@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c6953dd83623c8479fd5050eacd91b9, type: 3}
   m_Name: Talisman
   m_EditorClassIdentifier: 
+  type: 2
+  ID: 203
   Name: Talisman
-  TrinketID: 101
-  TrinketType: 100
   Icon: {fileID: 21300000, guid: b715ec5368696a641b4f32f4568976f3, type: 3}
+  TrinketType: 100

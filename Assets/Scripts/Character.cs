@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Wagnificent.CharacterStats;
 
 public enum Race
@@ -15,41 +13,22 @@ public enum Race
 
 public class Character: MonoBehaviour
 {
+    public string Name = null;
 
-    public Race Race;
+    public int Level = 1;
 
-    public ArmorRating ArmorRating = new ArmorRating(1f);
+    public int Experience = 0;
 
-    //Attributes
-    public Attribute Strength = new Attribute(100f);
-    public Attribute Endurance = new Attribute(100f);
-    public Attribute Coordination = new Attribute(100f);
-    public Attribute Agility = new Attribute(100f);
-    public Attribute Willpower = new Attribute(100f);
+    public Race Race = Race.Human;
 
-    //Weapon Skills
-    public Skill Unarmed = new Skill(100f);
-    public Skill OneHanded = new Skill(100f);
-    public Skill TwoHanded = new Skill(100f);
-    public Skill Archery = new Skill(100f);
+    public ArmorRating ArmorRating = new ArmorRating();
 
-    //Magic Skills
-    public Skill CombatMagic = new Skill(100f);
-    public Skill VitalMagic = new Skill(100f);
-    public Skill SupportMagic = new Skill(100f);
-    public Skill UtilityMagic = new Skill(100f);
+    public Attribute[] Attributes = new Attribute[5];
 
-    //Defensive Skills
-    public Skill Block = new Skill(100f);
-    public Skill Dodge = new Skill(100f);
-    public Skill Parry = new Skill(100f);
-    public Skill Harden = new Skill(100f);
+    public Skill[] Skills = new Skill[12];
 
     //Equipment
-    public Weapon[] Weapons = new Weapon[3];
-    public Armor Armor;
-    public Consumable Consumable;
-    public Trinket Trinket;
+    public Equipment[] Equipment = new Equipment[6];
 
     // Abilities
     public Ability[] PrimaryAbilities = new Ability[8];

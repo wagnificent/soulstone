@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b66af16fca3e4c440bc3e3de5b4f841c, type: 3}
   m_Name: Practice Bow
   m_EditorClassIdentifier: 
+  type: 0
+  ID: 1
   Name: Teak Bow
-  WeaponID: 401
-  WeaponType: 400
+  Icon: {fileID: 21300000, guid: a647409082a58b745b5e24df4c54ac27, type: 3}
+  WeaponType: 3
   BaseDamage: 20
   CanChannelMagic: 0
   IsLarge: 1
   IsEquipped: 0
   IsActive: 0
-  Icon: {fileID: 21300000, guid: a647409082a58b745b5e24df4c54ac27, type: 3}

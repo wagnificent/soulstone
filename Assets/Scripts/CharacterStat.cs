@@ -7,16 +7,16 @@ namespace Wagnificent.CharacterStats
     [Serializable]
     public class CharacterStat
     {
-        public float BaseValue;
+        public int BaseValue;
 
         protected bool isDirty = true;
-        protected float _value;
-        protected float lastBaseValue = float.MinValue;
+        protected int _value;
+        protected int lastBaseValue = int.MinValue;
         protected readonly List<StatModifier> statModifiers;
 
         public ReadOnlyCollection<StatModifier> StatModifiers;
 
-        public virtual float Value
+        public virtual int Value
         {
             get
             {
@@ -36,7 +36,7 @@ namespace Wagnificent.CharacterStats
             StatModifiers = statModifiers.AsReadOnly();
         }
 
-        public CharacterStat(float baseValue) : this()
+        public CharacterStat(int baseValue) : this()
         {
             BaseValue = baseValue;
         }
@@ -89,10 +89,10 @@ namespace Wagnificent.CharacterStats
             return didRemove;
         }
 
-        public virtual float CalculateFinalValue()
+        public virtual int CalculateFinalValue()
         {
-            float finalValue = BaseValue;
-            float sumPercentAdd = 0;
+            int finalValue = BaseValue;
+            int sumPercentAdd = 0;
 
             for (int i = 0; i < statModifiers.Count; i++)
             {
@@ -116,7 +116,8 @@ namespace Wagnificent.CharacterStats
                     finalValue *= 1 + mod.Value;
                 }
             }
-            return (float)Math.Round(finalValue, 4);
+            return finalValue;
         }
+
     }
 }

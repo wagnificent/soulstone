@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5798fc8de903a084f9311b77c3497360, type: 3}
   m_Name: Light Armor
   m_EditorClassIdentifier: 
+  type: 1
+  ID: 102
   Name: Animal Skins
-  ArmorID: 101
+  Icon: {fileID: 21300000, guid: 5989d7a6a4485154dafd7205097634a9, type: 3}
   ArmorType: 0
   BaseProtection: 25
-  Icon: {fileID: 21300000, guid: 5989d7a6a4485154dafd7205097634a9, type: 3}

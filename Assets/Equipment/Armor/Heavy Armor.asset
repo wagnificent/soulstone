@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5798fc8de903a084f9311b77c3497360, type: 3}
   m_Name: Heavy Armor
   m_EditorClassIdentifier: 
+  type: 1
+  ID: 101
   Name: Steel Plate Armor
-  ArmorID: 301
+  Icon: {fileID: 21300000, guid: a5f7c4be993721f4d87988e6978b85ff, type: 3}
   ArmorType: 2
   BaseProtection: 100
-  Icon: {fileID: 21300000, guid: a5f7c4be993721f4d87988e6978b85ff, type: 3}

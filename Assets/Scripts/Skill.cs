@@ -5,12 +5,12 @@
     public class Skill : CharacterStat
     {
 
-        public float TrainingBonus;
+        public int TrainingBonus;
         public int SkillLevel;
 
-        public Skill(float defaultValue)
+        public Skill()
         {
-            BaseValue = defaultValue;
+            BaseValue = 100;
         }
     }
 }

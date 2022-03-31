@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
-using Wagnificent.CharacterStats;
 
 public class SaveHandler: MonoBehaviour
 {
@@ -63,65 +61,32 @@ public class SaveHandler: MonoBehaviour
 
     void SaveIdentity(Character character, SavedCharacter savedCharacter)
     {
-        if (character.Race == Race.Human) { savedCharacter.Race = 0; }
-        if (character.Race == Race.Elf) { savedCharacter.Race = 1; }
-        if (character.Race == Race.Orc) { savedCharacter.Race = 2; }
-        if (character.Race == Race.Dwarf) { savedCharacter.Race = 3; }
-        if (character.Race == Race.Halfling) { savedCharacter.Race = 4; }
-        if (character.Race == Race.Goblin) { savedCharacter.Race = 5; }
+        savedCharacter.Race = (int)character.Race;
     }
 
     void SaveAttributes(Character character, SavedCharacter savedCharacter)
     {
-        savedCharacter.Strength = character.Strength.AllocationBonus;
-        savedCharacter.Endurance = character.Endurance.AllocationBonus;
-        savedCharacter.Coordination = character.Coordination.AllocationBonus;
-        savedCharacter.Agility = character.Agility.AllocationBonus;
-        savedCharacter.Willpower = character.Willpower.AllocationBonus;
+        for (int i = 0; i <savedCharacter.Attributes.Length; i++)
+        {
+            savedCharacter.Attributes[i] = character.Attributes[i].AllocationBonus;
+        }
     }
 
     void SaveSkills(Character character, SavedCharacter savedCharacter)
     {
-        //Weapon Skills
-        savedCharacter.Unarmed = character.Unarmed.SkillLevel;
-        savedCharacter.OneHanded = character.OneHanded.SkillLevel;
-        savedCharacter.TwoHanded = character.TwoHanded.SkillLevel;
-        savedCharacter.Archery = character.Archery.SkillLevel;
-
-        //Magic Skills
-        savedCharacter.CombatMagic = character.CombatMagic.SkillLevel;
-        savedCharacter.VitalMagic = character.VitalMagic.SkillLevel;
-        savedCharacter.SupportMagic = character.SupportMagic.SkillLevel;
-        savedCharacter.UtilityMagic = character.UtilityMagic.SkillLevel;
-
-        //Defensive Skills
-        savedCharacter.Block = character.Block.SkillLevel;
-        savedCharacter.Dodge = character.Dodge.SkillLevel;
-        savedCharacter.Parry = character.Parry.SkillLevel;
-        savedCharacter.Harden = character.Harden.SkillLevel;
+        for (int i = 0; i < savedCharacter.Skills.Length; i++)
+        {
+            savedCharacter.Skills[i] = character.Skills[i].SkillLevel;
+        }
     }
 
     void SaveEquipment(Character character, SavedCharacter savedCharacter)
     {
-        //Weapons
-        savedCharacter.Weapons = new List<int>();
-        for (int i = 0; i < character.Weapons.Length; i++)
+        for (int i = 0; i < character.Equipment.Length; i++)
         {
-            if (character.Weapons[i] == null) { savedCharacter.Weapons.Add(0); }
-            else { savedCharacter.Weapons.Add(character.Weapons[i].WeaponID); }
+            if(character.Equipment[i] == null) { savedCharacter.Equipment[i] = 0; }
+            else { savedCharacter.Equipment[i] = character.Equipment[i].ID; }
         }
-
-        //Armor
-        if (character.Armor == null) { savedCharacter.Armor = 0; }
-        else { savedCharacter.Armor = character.Armor.ArmorID; }
-
-        //Consumable
-        if (character.Consumable == null) { savedCharacter.Consumable = 0; }
-        else { savedCharacter.Consumable = character.Consumable.ConsumableID; }
-
-        //Trinket
-        if (character.Trinket == null) { savedCharacter.Trinket = 0; }
-        else { savedCharacter.Trinket = character.Trinket.TrinketID; }
     }
 
     void SaveAbilities(Character character, SavedCharacter savedCharacter)
@@ -145,67 +110,37 @@ public class SaveHandler: MonoBehaviour
 
     void LoadIdentity(SavedCharacter savedCharacter, Character shell)
     {
-        //Race
-        if (savedCharacter.Race == 0) { shell.Race = Race.Human; }
-        if (savedCharacter.Race == 1) { shell.Race = Race.Elf; }
-        if (savedCharacter.Race == 2) { shell.Race = Race.Orc; }
-        if (savedCharacter.Race == 3) { shell.Race = Race.Dwarf; }
-        if (savedCharacter.Race == 4) { shell.Race = Race.Halfling; }
-        if (savedCharacter.Race == 5) { shell.Race = Race.Goblin; }
+        shell.Race = (Race)savedCharacter.Race;
     }
 
     void LoadAttributes(SavedCharacter savedCharacter, Character shell)
     {
-        shell.Strength.AllocationBonus = savedCharacter.Strength;
-        shell.Endurance.AllocationBonus = savedCharacter.Endurance;
-        shell.Coordination.AllocationBonus = savedCharacter.Coordination;
-        shell.Agility.AllocationBonus = savedCharacter.Agility;
-        shell.Willpower.AllocationBonus = savedCharacter.Willpower;
+        for (int i = 0; i < shell.Attributes.Length; i++)
+        {
+            shell.Attributes[i].AllocationBonus = savedCharacter.Attributes[i];
+        }
     }
 
     void LoadSkills(SavedCharacter savedCharacter, Character shell)
     {
-        //Weapon Skills
-        shell.Unarmed.SkillLevel = savedCharacter.Unarmed;
-        shell.OneHanded.SkillLevel = savedCharacter.OneHanded;
-        shell.TwoHanded.SkillLevel = savedCharacter.TwoHanded;
-        shell.Archery.SkillLevel = savedCharacter.Archery;
-
-        //Magic Skills
-        shell.CombatMagic.SkillLevel = savedCharacter.CombatMagic;
-        shell.VitalMagic.SkillLevel = savedCharacter.VitalMagic;
-        shell.SupportMagic.SkillLevel = savedCharacter.SupportMagic;
-        shell.UtilityMagic.SkillLevel = savedCharacter.UtilityMagic;
-
-        //Defensive Skills
-        shell.Block.SkillLevel = savedCharacter.Block;
-        shell.Dodge.SkillLevel = savedCharacter.Dodge;
-        shell.Parry.SkillLevel = savedCharacter.Parry;
-        shell.Harden.SkillLevel = savedCharacter.Harden;
+        for (int i = 0; i < shell.Skills.Length; i++)
+        {
+            shell.Skills[i].SkillLevel = savedCharacter.Skills[i];
+        }
     }
 
     void LoadEquipment(SavedCharacter savedCharacter, Character shell)
     {
         MasterList masterList = FindObjectOfType<MasterList>();
 
-        //Weapons
-        for (int i = 0; i < savedCharacter.Weapons.Count; i++)
+        for (int i = 0; i < savedCharacter.Equipment.Length; i++)
         {
-            if (savedCharacter.Weapons[i] == 0) { shell.Weapons[i] = null; }
-            else { shell.Weapons[i] = masterList.GetWeapon(savedCharacter.Weapons[i]); }
+            if (i < 3 && savedCharacter.Equipment[i] != 0) { shell.Equipment[i] = masterList.GetEquipment((EquipmentType)0, savedCharacter.Equipment[i]) as Weapon; }
+            else if (i == 3 && savedCharacter.Equipment[i] != 0) { shell.Equipment[i] = masterList.GetEquipment((EquipmentType)1, savedCharacter.Equipment[i]) as Armor; }
+            else if (i == 4 && savedCharacter.Equipment[i] != 0) { shell.Equipment[i] = masterList.GetEquipment((EquipmentType)2, savedCharacter.Equipment[i]) as Trinket; }
+            else if (i == 5 && savedCharacter.Equipment[i] != 0) { shell.Equipment[i] = masterList.GetEquipment((EquipmentType)3, savedCharacter.Equipment[i]) as Consumable; }
+            else { shell.Equipment[i] = null; }
         }
-
-        //Armor
-        if (savedCharacter.Armor == 0) { shell.Armor = null; }
-        else { shell.Armor = masterList.GetArmor(savedCharacter.Armor); }
-
-        //Consumable
-        if (savedCharacter.Consumable == 0) { shell.Consumable = null; }
-        else { shell.Consumable = masterList.GetConsumable(savedCharacter.Consumable); }
-
-        //Trinket
-        if (savedCharacter.Trinket == 0) { shell.Trinket = null; }
-        else { shell.Trinket = masterList.GetTrinket(savedCharacter.Trinket); }
     }
 
     void LoadAbilities(SavedCharacter savedCharacter, Character shell)

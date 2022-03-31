@@ -3,11 +3,21 @@ using UnityEngine;
 
 public class MasterList: MonoBehaviour
 {
-    public List<Weapon> Weapons;
-    public List<Armor> Armor;
-    public List<Consumable> Consumables;
-    public List<Trinket> Trinkets;
+    public List<Equipment> Equipment;
     public List<Ability> Abilities;
+
+    public Equipment GetEquipment(EquipmentType type, int id)
+    {
+        for (int i = 0; i < Equipment.Count; i++)
+        {
+            if (Equipment[i].type == type && Equipment[i].ID == id)
+            {
+                return Equipment[i];
+            }
+        }
+        Debug.Log("Equipment not found");
+        return null;
+    }
 
     public Ability GetAbility (int abilityID)
     {
@@ -21,55 +31,7 @@ public class MasterList: MonoBehaviour
         return null;
     }
 
-    public Consumable GetConsumable(int consumableID)
-    {
-        for (int i = 0; i < Consumables.Count; i++)
-        {
-            if (Consumables[i].ConsumableID == consumableID)
-            {
-                return Consumables[i];
-            }
-        }
-        return null;
-    }
-
-    public Trinket GetTrinket(int trinketID)
-    {
-        for (int i = 0; i < Trinkets.Count; i++)
-        {
-            if (Trinkets[i].TrinketID == trinketID)
-            {
-                return Trinkets[i];
-            }
-        }
-        return null;
-    }
-
-    public Weapon GetWeapon(int weaponID)
-    {
-        for (int i = 0; i < Weapons.Count; i++)
-        {
-            if (Weapons[i].WeaponID == weaponID)
-            {
-                return Weapons[i];
-            }
-        }
-        return null;
-    }
-
-    public Armor GetArmor(int armorID)
-    {
-        for (int i = 0; i < Armor.Count; i++)
-        {
-            if (Armor[i].ArmorID == armorID)
-            {
-                return Armor[i];
-            }
-        }
-        return null;
-    }
-
-    public List<Ability> FindAbilities(AbilityType abilityType, int skillLevel)
+    public List<Ability> GetAbilities(AbilityType abilityType, int skillLevel)
     {
         List<Ability> matchingAbilities = new List<Ability>();
         foreach(Ability ability in Abilities)
@@ -80,5 +42,14 @@ public class MasterList: MonoBehaviour
             }
         }
         return matchingAbilities;
+    }
+
+    public AbilityType GetAbilityType(Weapon weapon)
+    {
+        if (weapon.WeaponType == WeaponType.Unarmed) { return AbilityType.Unarmed; }
+        else if (weapon.WeaponType == WeaponType.OneHanded) { return AbilityType.OneHanded; }
+        else if (weapon.WeaponType == WeaponType.TwoHanded) { return AbilityType.TwoHanded; }
+        else if (weapon.WeaponType == WeaponType.Bow) { return AbilityType.Archery; }
+        else { Debug.Log("Weapon type not found.  Returning archery"); return AbilityType.Archery; }
     }
 }

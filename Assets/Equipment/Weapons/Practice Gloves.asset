@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b66af16fca3e4c440bc3e3de5b4f841c, type: 3}
   m_Name: Practice Gloves
   m_EditorClassIdentifier: 
+  type: 0
+  ID: 2
   Name: Leather Gloves
-  WeaponID: 101
-  WeaponType: 100
+  Icon: {fileID: 21300000, guid: 7fa8e52f06f23bf4eab2e6a184085085, type: 3}
+  WeaponType: 0
   BaseDamage: 5
   CanChannelMagic: 0
   IsLarge: 0
   IsEquipped: 0
   IsActive: 0
-  Icon: {fileID: 21300000, guid: 7fa8e52f06f23bf4eab2e6a184085085, type: 3}

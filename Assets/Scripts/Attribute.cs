@@ -4,12 +4,18 @@
     public class Attribute : CharacterStat
     {
 
-        public float RacialBonus;
-        public float AllocationBonus;
-
-        public Attribute (float defaultValue)
+        public int DefaultValue = 100; 
+        public int RacialBonus = 0;
+        public int AllocationBonus = 0;
+        
+        public Attribute ()
         {
-            BaseValue = defaultValue;
+            BaseValue = DefaultValue;
+        }
+
+        public void AddBonuses()
+        {
+            BaseValue = (DefaultValue + RacialBonus + AllocationBonus);
         }
     }
 }

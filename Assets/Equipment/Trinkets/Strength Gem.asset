@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c6953dd83623c8479fd5050eacd91b9, type: 3}
   m_Name: Strength Gem
   m_EditorClassIdentifier: 
+  type: 2
+  ID: 202
   Name: Strength Gem
-  TrinketID: 202
-  TrinketType: 200
   Icon: {fileID: 21300000, guid: dfb5773d2068a0b4d8f2636f1bf40f50, type: 3}
+  TrinketType: 200

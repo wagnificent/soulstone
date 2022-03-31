@@ -22,9 +22,18 @@ public class Bot : Destructible
     {
         matchHandler = FindObjectOfType<MatchHandler>();
         myCharacter = GetComponent<Character>();
+        InitializeCharacter();
         currentHealth = maxHealth;
         currentEnergy = maxEnergy;
         InvokeRepeating("RegenEnergy", 3f, 3f);
+    }
+
+    private void InitializeCharacter()
+    {
+        for (int i = 0; i < myCharacter.Attributes.Length; i++)
+        {
+            myCharacter.Attributes[i].AddBonuses();
+        }
     }
 
     public override void TakeDamage(float amount)
@@ -126,7 +135,7 @@ public class Bot : Destructible
         //Check defenses, and adjust damage as appropriate
         if (isDodging)
         {
-            if (DidDefend(attackskill, myCharacter.Dodge.Value))
+            if (DidDefend(attackskill, myCharacter.Skills[8].Value))
             {
                 Debug.Log("Dodged the attack!");
                 //dodging animation
@@ -135,7 +144,7 @@ public class Bot : Destructible
         }
         else if (isParrying)
         {
-            if (DidDefend(attackskill, myCharacter.Parry.Value))
+            if (DidDefend(attackskill, myCharacter.Skills[10].Value))
             {
                 Debug.Log("Parried the attack!");
                 //parrying animation
@@ -144,16 +153,16 @@ public class Bot : Destructible
         }
         else if (isBlocking)
         {
-            if (DidDefend(attackskill, myCharacter.Block.Value))
+            if (DidDefend(attackskill, myCharacter.Skills[9].Value))
             {
-                adjustedDamage *= (50 / (myCharacter.Block.Value * 2));
+                adjustedDamage *= (50 / (myCharacter.Skills[9].Value * 2));
                 Debug.Log("Blocked some damage!");
                 //blocking animation
             }
         }
         else if (isHardening)
         {
-            adjustedDamage *= myCharacter.Harden.Value;
+            adjustedDamage *= myCharacter.Skills[11].Value;
         }
 
         //Adjust damage per armor values

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 
 [System.Serializable]
 public class SavedCharacter
@@ -9,35 +7,13 @@ public class SavedCharacter
     public int Race;
 
     //Attributes
-    public float Strength;
-    public float Endurance;
-    public float Coordination;
-    public float Agility;
-    public float Willpower;
+    public int[] Attributes = new int[5];
 
-    //Weapon Skills
-    public int Unarmed;
-    public int OneHanded;
-    public int TwoHanded;
-    public int Archery;
-
-    //Magic Skills
-    public int CombatMagic;
-    public int VitalMagic;
-    public int SupportMagic;
-    public int UtilityMagic;
-
-    //Defensive Skills
-    public int Block;
-    public int Dodge;
-    public int Parry;
-    public int Harden;
+    //Skills
+    public int[] Skills = new int[12];
 
     //Equipment
-    public List<int> Weapons;
-    public int Armor;
-    public int Consumable;
-    public int Trinket;
+    public int[] Equipment = new int[6];
 
     //Abilities
     public List<int> PrimaryAbilities;

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using Wagnificent.CharacterStats;
 
 public class Player : Destructible
@@ -36,11 +34,20 @@ public class Player : Destructible
         matchHandler = FindObjectOfType<MatchHandler>();
         myCharacter = GetComponent<Character>();
         myRigidbody = GetComponent<Rigidbody>();
+        targetingSystem = GetComponent<TargetingSystem>();
+        myHUD = GetComponent<PlayerHUD>();
+        InitializeCharacter();
         currentEnergy = maxEnergy;
         InvokeRepeating("UpdateEnergy", 1f, 1f);
-        myHUD = GetComponent<PlayerHUD>();
         myHUD.UpdateVitals();
-        targetingSystem = GetComponent<TargetingSystem>();
+    }
+
+    private void InitializeCharacter()
+    {
+        for (int i = 0; i < myCharacter.Attributes.Length; i++)
+        {
+            myCharacter.Attributes[i].AddBonuses();
+        }
     }
 
     public override void TakeDamage(float amount)
@@ -239,7 +246,7 @@ public class Player : Destructible
         //Check defenses, and adjust damage as appropriate
         if (isDodging && attacker == targetingSystem.currentTarget)
         {
-            if (DidDefend(hitChance, myCharacter.Dodge.Value))
+            if (DidDefend(hitChance, myCharacter.Skills[8].Value))
             {
                 Debug.Log("Dodged the attack!");
                 //dodging animation
@@ -248,7 +255,7 @@ public class Player : Destructible
         }
         else if (isParrying && attacker == targetingSystem.currentTarget)
         {
-            if (DidDefend(hitChance, myCharacter.Parry.Value))
+            if (DidDefend(hitChance, myCharacter.Skills[10].Value))
             {
                 Debug.Log("Parried the attack!");
                 //parrying animation
@@ -257,16 +264,16 @@ public class Player : Destructible
         }
         else if (isBlocking && attacker == targetingSystem.currentTarget)
         {
-            if (DidDefend(hitChance, myCharacter.Block.Value))
+            if (DidDefend(hitChance, myCharacter.Skills[9].Value))
             {
-                adjustedDamage *= (50 / (myCharacter.Block.Value * 2));
+                adjustedDamage *= (50 / (myCharacter.Skills[9].Value * 2));
                 Debug.Log("Blocked some damage!");
                 //blocking animation
             }
         }
         else if (isHardening && attacker == targetingSystem.currentTarget)
         {
-            adjustedDamage *= myCharacter.Harden.Value;
+            adjustedDamage *= myCharacter.Skills[11].Value;
         }
 
         //Adjust damage per armor values
@@ -279,19 +286,8 @@ public class Player : Destructible
 
     private float MatchingSkill(AbilityType abilityType)
     {
-        if(abilityType == AbilityType.Unarmed) { return myCharacter.Unarmed.Value; }
-        else if (abilityType == AbilityType.OneHanded) { return myCharacter.OneHanded.Value; }
-        else if (abilityType == AbilityType.TwoHanded) { return myCharacter.TwoHanded.Value; }
-        else if (abilityType == AbilityType.Archery) { return myCharacter.Archery.Value; }
-        else if (abilityType == AbilityType.CombatMagic) { return myCharacter.CombatMagic.Value; }
-        else if (abilityType == AbilityType.VitalMagic) { return myCharacter.VitalMagic.Value; }
-        else if (abilityType == AbilityType.SupportMagic) { return myCharacter.SupportMagic.Value; }
-        else if (abilityType == AbilityType.UtilityMagic) { return myCharacter.UtilityMagic.Value; }
-        else if (abilityType == AbilityType.Block) { return myCharacter.Block.Value; }
-        else if (abilityType == AbilityType.Dodge) { return myCharacter.Dodge.Value; }
-        else if (abilityType == AbilityType.Parry) { return myCharacter.Parry.Value; }
-        else if (abilityType == AbilityType.Harden) { return myCharacter.Harden.Value; }
-        else { Debug.Log("Ability type not found"); return 0; }
+        int skillIndex = ((int)abilityType);
+        return myCharacter.Skills[skillIndex].Value;
     }
 
     private float MatchingWeapon(AbilityType abilityType)
@@ -301,23 +297,25 @@ public class Player : Destructible
         {
             for (int i = 0; i < 2; i++)
             {
-                if(myCharacter.Weapons[i] != null)
+                if(myCharacter.Equipment[i] != null)
                 {
-                    if (abilityType == AbilityType.Unarmed && myCharacter.Weapons[i].WeaponType == WeaponType.Unarmed)
+                    Weapon w = myCharacter.Equipment[i] as Weapon;
+
+                    if (abilityType == AbilityType.Unarmed && w.WeaponType == WeaponType.Unarmed)
                     {
-                        return myCharacter.Weapons[i].BaseDamage;
+                        return w.BaseDamage;
                     }
-                    else if (abilityType == AbilityType.OneHanded && myCharacter.Weapons[i].WeaponType == WeaponType.OneHanded)
+                    else if (abilityType == AbilityType.OneHanded && w.WeaponType == WeaponType.OneHanded)
                     {
-                        return myCharacter.Weapons[i].BaseDamage;
+                        return w.BaseDamage;
                     }
-                    else if (abilityType == AbilityType.TwoHanded && myCharacter.Weapons[i].WeaponType == WeaponType.TwoHanded)
+                    else if (abilityType == AbilityType.TwoHanded && w.WeaponType == WeaponType.TwoHanded)
                     {
-                        return myCharacter.Weapons[i].BaseDamage;
+                        return w.BaseDamage;
                     }
-                    else if (abilityType == AbilityType.Archery && myCharacter.Weapons[i].WeaponType == WeaponType.Bow)
+                    else if (abilityType == AbilityType.Archery && w.WeaponType == WeaponType.Bow)
                     {
-                        return myCharacter.Weapons[i].BaseDamage;
+                        return w.BaseDamage;
                     }
                     else if (
                         (
@@ -327,10 +325,10 @@ public class Player : Destructible
                         abilityType == AbilityType.UtilityMagic
                         )
                         &&
-                        myCharacter.Weapons[i].CanChannelMagic
+                        w.CanChannelMagic
                         )
                     { 
-                        return myCharacter.Weapons[i].BaseDamage; 
+                        return w.BaseDamage; 
                     }
                 }
                 else
@@ -347,23 +345,25 @@ public class Player : Destructible
         // Check alternate weapon
         else
         {
-            if(myCharacter.Weapons[2] != null)
+            if(myCharacter.Equipment[2] != null)
             {
-                if (abilityType == AbilityType.Unarmed && myCharacter.Weapons[2].WeaponType == WeaponType.Unarmed)
+                Weapon w = myCharacter.Equipment[2] as Weapon;
+
+                if (abilityType == AbilityType.Unarmed && w.WeaponType == WeaponType.Unarmed)
                 {
-                    return myCharacter.Weapons[2].BaseDamage;
+                    return w.BaseDamage;
                 }
-                else if (abilityType == AbilityType.OneHanded && myCharacter.Weapons[2].WeaponType == WeaponType.OneHanded)
+                else if (abilityType == AbilityType.OneHanded && w.WeaponType == WeaponType.OneHanded)
                 {
-                    return myCharacter.Weapons[2].BaseDamage;
+                    return w.BaseDamage;
                 }
-                else if (abilityType == AbilityType.TwoHanded && myCharacter.Weapons[2].WeaponType == WeaponType.TwoHanded)
+                else if (abilityType == AbilityType.TwoHanded && w.WeaponType == WeaponType.TwoHanded)
                 {
-                    return myCharacter.Weapons[2].BaseDamage;
+                    return w.BaseDamage;
                 }
-                else if (abilityType == AbilityType.Archery && myCharacter.Weapons[2].WeaponType == WeaponType.Bow)
+                else if (abilityType == AbilityType.Archery && w.WeaponType == WeaponType.Bow)
                 {
-                    return myCharacter.Weapons[2].BaseDamage;
+                    return w.BaseDamage;
                 }
                 else if (
                     (
@@ -373,10 +373,10 @@ public class Player : Destructible
                     abilityType == AbilityType.UtilityMagic
                     )
                     &&
-                    myCharacter.Weapons[2].CanChannelMagic
+                    w.CanChannelMagic
                     )
                 {
-                    return myCharacter.Weapons[2].BaseDamage;
+                    return w.BaseDamage;
                 }
                 else
                 {
@@ -400,12 +400,12 @@ public class Player : Destructible
             abilityType == AbilityType.SupportMagic ||
             abilityType == AbilityType.UtilityMagic)
         {
-            return myCharacter.Willpower.Value;
+            return myCharacter.Attributes[4].Value;
         }
 
         else 
         { 
-            return myCharacter.Strength.Value;
+            return myCharacter.Attributes[0].Value;
         }
     }
 
@@ -417,7 +417,7 @@ public class Player : Destructible
 
     private float CalculateHitChance(Ability ability)
     {
-        float hitChance = (myCharacter.Coordination.Value + MatchingSkill(ability.AbilityType)) / 200;
+        float hitChance = (myCharacter.Attributes[2].Value + MatchingSkill(ability.AbilityType)) / 200;
         return hitChance;
     }
 

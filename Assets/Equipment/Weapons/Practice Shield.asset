@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b66af16fca3e4c440bc3e3de5b4f841c, type: 3}
   m_Name: Practice Shield
   m_EditorClassIdentifier: 
+  type: 0
+  ID: 3
   Name: Iron Shield
-  WeaponID: 501
-  WeaponType: 500
+  Icon: {fileID: 21300000, guid: 4fb0f5a45e9733648802b3d061252c9a, type: 3}
+  WeaponType: 4
   BaseDamage: 0
   CanChannelMagic: 0
   IsLarge: 0
   IsEquipped: 0
   IsActive: 0
-  Icon: {fileID: 21300000, guid: 4fb0f5a45e9733648802b3d061252c9a, type: 3}

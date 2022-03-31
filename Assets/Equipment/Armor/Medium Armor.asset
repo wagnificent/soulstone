@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5798fc8de903a084f9311b77c3497360, type: 3}
   m_Name: Medium Armor
   m_EditorClassIdentifier: 
+  type: 1
+  ID: 103
   Name: Chainmail
-  ArmorID: 201
+  Icon: {fileID: 21300000, guid: 0b907523d8ce63747baa2de54b3bc40b, type: 3}
   ArmorType: 1
   BaseProtection: 50
-  Icon: {fileID: 21300000, guid: 0b907523d8ce63747baa2de54b3bc40b, type: 3}

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c6953dd83623c8479fd5050eacd91b9, type: 3}
   m_Name: Worry Stone
   m_EditorClassIdentifier: 
+  type: 2
+  ID: 204
   Name: Worry Stone
-  TrinketID: 102
-  TrinketType: 100
   Icon: {fileID: 21300000, guid: ed9abf731f61c9543a741d6bf0dd4aec, type: 3}
+  TrinketType: 100

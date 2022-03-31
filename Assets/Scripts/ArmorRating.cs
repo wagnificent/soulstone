@@ -5,9 +5,9 @@
     public class ArmorRating : CharacterStat
     {
 
-        public ArmorRating(float defaultValue)
+        public ArmorRating()
         {
-            BaseValue = defaultValue;
+            BaseValue = 0;
         }
 
     }

@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b66af16fca3e4c440bc3e3de5b4f841c, type: 3}
   m_Name: Practice Sword
   m_EditorClassIdentifier: 
+  type: 0
+  ID: 5
   Name: Iron Shortsword
-  WeaponID: 201
-  WeaponType: 200
+  Icon: {fileID: 21300000, guid: 71ec8d17fb05be64fbb2a612f4392544, type: 3}
+  WeaponType: 1
   BaseDamage: 10
   CanChannelMagic: 0
   IsLarge: 0
   IsEquipped: 0
   IsActive: 0
-  Icon: {fileID: 21300000, guid: 71ec8d17fb05be64fbb2a612f4392544, type: 3}
